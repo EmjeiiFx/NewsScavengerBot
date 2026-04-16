@@ -4,6 +4,8 @@ from telegram.ext import ContextTypes
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = (
         "👋 ¡Hola! Soy NewsScavengerBot.\n\n"
+        "• Noticias Relevantes en Tiempo Real\n"
+        "• Alertas y señales para US30\n" 
         "• Usa /id en cualquier chat para obtener el ID y añadirlo a TELEGRAM_TARGETS.\n"
         "• Envío de noticias (RSS) + señales técnicas US30 (yfinance)."
     )
