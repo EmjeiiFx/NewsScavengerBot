@@ -5,7 +5,9 @@ import json
 from contextlib import contextmanager
 
 def ensure_dir(path: str):
-    os.makedirs(os.path.dirname(path), exist_ok=True)
+    dirpath = os.path.dirname(path)
+    if dirpath:
+        os.makedirs(dirpath, exist_ok=True)
 
 def init_db(db_path: str):
     ensure_dir(db_path)
