@@ -117,11 +117,20 @@ def main():
     async def job_us30():
         await broadcast_us30(app, settings)
 
-    scheduler.add_job(job_news, "interval", minutes=settings.refresh_minutes, next_run_time=None)
-    scheduler.add_job(job_us30, "interval", minutes=settings.us30_refresh_minutes, next_run_time=None)
+    scheduler.add_job(job_news, "interval", minutes=settings.refresh_minutes)
+    scheduler.add_job(job_us30, "interval", minutes=settings.us30_refresh_minutes)
 
     scheduler.start()
-    print("[bot] iniciando polling…")
+    
+    async def startup_tasks():
+        print("[Startup] ejecutando prueba inicial de RSS...")
+        await broadcast_news(app, settings)
+        print("[startup] ejecutando prueba inicial de US30...")
+        await broadcast_us30(app, settings)
+
+    app.post_init = startup_tasks
+
+    print("[bot] iniciando polling...")
     app.run_polling(close_loop=False)
 
 if __name__ == "__main__":
