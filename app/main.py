@@ -122,7 +122,7 @@ def main():
 
     scheduler.start()
     
-    async def startup_tasks():
+    async def startup_tasks(app):
         print("[Startup] ejecutando prueba inicial de RSS...")
         await broadcast_news(app, settings)
         print("[startup] ejecutando prueba inicial de US30...")
